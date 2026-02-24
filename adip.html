@@ -1,0 +1,371 @@
+import React, { useState } from 'react';
+import { Menu, X, Users, Lightbulb, Target, MapPin, Mail, ChevronRight, Award, BookOpen } from 'lucide-react';
+
+const App = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Couleurs basées sur le logo (Vert émeraude et Noir)
+  const colors = {
+    primary: '#10b981', // Emerald green
+    secondary: '#000000', // Black
+    accent: '#facc15', // Yellow (bulb color)
+    light: '#f9fafb'
+  };
+
+  const navItems = [
+    { name: 'Accueil', href: '#home' },
+    { name: 'À Propos', href: '#about' },
+    { name: 'Statuts', href: '#statutes' },
+    { name: 'Membres', href: '#members' },
+    { name: 'Galerie', href: '#gallery' },
+    { name: 'Contact', href: '#contact' },
+  ];
+
+  return (
+    <div className="min-h-screen font-sans text-gray-900 bg-white">
+      {/* Navigation */}
+      <nav className="fixed w-full bg-black text-white z-50 shadow-lg">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-20">
+            <div className="flex items-center gap-3">
+              <img 
+                src="ADIP logo.png" 
+                alt="ADIP Logo" 
+                className="h-14 w-14 object-contain rounded-lg bg-white p-1"
+                onError={(e) => e.target.src = 'https://via.placeholder.com/60?text=ADIP'}
+              />
+              <span className="font-bold text-xl tracking-tight hidden sm:block">ADIP</span>
+            </div>
+            
+            <div className="hidden md:block">
+              <div className="ml-10 flex items-baseline space-x-6">
+                {navItems.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                  >
+                    {item.name}
+                  </a>
+                ))}
+              </div>
+            </div>
+            
+            <div className="md:hidden">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="p-2 rounded-md text-gray-400 hover:text-white focus:outline-none"
+              >
+                {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-zinc-900 px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            {navItems.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                onClick={() => setIsMenuOpen(false)}
+                className="block px-3 py-2 rounded-md text-base font-medium hover:bg-zinc-800"
+              >
+                {item.name}
+              </a>
+            ))}
+          </div>
+        )}
+      </nav>
+
+      {/* Hero Section */}
+      <section id="home" className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-black overflow-hidden">
+        <div className="absolute inset-0 opacity-40">
+           <img 
+            src="Adip.jpeg" 
+            className="w-full h-full object-cover" 
+            alt="Hero Background"
+            onError={(e) => e.target.style.display = 'none'}
+          />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6">
+            Alliance Dynamique pour l'Innovation <br/>
+            <span className="text-emerald-500">et le Progrès (ADIP)</span>
+          </h1>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-10">
+            Fédérer un réseau de collaboration et de partage de connaissances pour promouvoir l'innovation et le développement durable en Haïti.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="#about" className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-emerald-500/20">
+              Découvrir notre mission
+            </a>
+            <a href="#contact" className="bg-white hover:bg-gray-100 text-black px-8 py-3 rounded-full font-bold text-lg transition-all">
+              Nous rejoindre
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission & Objectifs */}
+      <section id="about" className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl mb-4">Notre Mission</h2>
+            <div className="w-20 h-1 bg-emerald-500 mx-auto rounded-full"></div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+              <div className="bg-emerald-100 p-3 w-fit rounded-lg mb-6">
+                <Lightbulb className="text-emerald-600" size={32} />
+              </div>
+              <h3 className="text-xl font-bold mb-4">Innovation</h3>
+              <p className="text-gray-600">
+                Promouvoir des solutions créatives pour répondre aux défis contemporains du département de l'Artibonite.
+              </p>
+            </div>
+            <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+              <div className="bg-emerald-100 p-3 w-fit rounded-lg mb-6">
+                <BookOpen className="text-emerald-600" size={32} />
+              </div>
+              <h3 className="text-xl font-bold mb-4">Formation Continue</h3>
+              <p className="text-gray-600">
+                Encourager l'apprentissage permanent pour les professionnels et universitaires de notre réseau.
+              </p>
+            </div>
+            <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+              <div className="bg-emerald-100 p-3 w-fit rounded-lg mb-6">
+                <Target className="text-emerald-600" size={32} />
+              </div>
+              <h3 className="text-xl font-bold mb-4">Engagement Social</h3>
+              <p className="text-gray-600">
+                Participer activement au progrès collectif et au développement durable de notre communauté.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Résumé des Statuts */}
+      <section id="statutes" className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row gap-12 items-center">
+            <div className="lg:w-1/2">
+              <h2 className="text-3xl font-bold mb-6">Statuts & Organisation</h2>
+              <p className="text-gray-600 mb-6 italic">
+                L'ADIP est une personne de droit privé à but non lucratif dont le siège est actuellement fixé à l'Université Publique de l'Artibonite aux Gonaïves (UPAG).
+              </p>
+              <ul className="space-y-4">
+                {[
+                  "Dénomination : Alliance Dynamique pour l'innovation et le progrès",
+                  "Sigle : ADIP",
+                  "Siège : UPAG, rue Chrysostome Humbert, Gonaïves",
+                  "Durée de vie : Indéterminée",
+                  "Organes : Assemblée Générale (AG) et Comité Exécutif (CG)"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <ChevronRight className="text-emerald-500 mt-1 flex-shrink-0" size={20} />
+                    <span className="text-gray-700">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="lg:w-1/2 grid grid-cols-2 gap-4">
+              <div className="space-y-4">
+                <div className="bg-zinc-900 text-white p-6 rounded-2xl">
+                  <h4 className="font-bold text-emerald-400 mb-2 text-2xl">7</h4>
+                  <p className="text-sm">Membres au Comité Exécutif</p>
+                </div>
+                <div className="bg-emerald-500 text-white p-6 rounded-2xl">
+                  <h4 className="font-bold mb-2 text-2xl">3 Ans</h4>
+                  <p className="text-sm">Durée d'un mandat électif</p>
+                </div>
+              </div>
+              <div className="pt-8">
+                <div className="bg-gray-100 p-6 rounded-2xl h-full flex flex-col justify-center">
+                  <h4 className="font-bold text-gray-900 mb-2 text-2xl">2/3</h4>
+                  <p className="text-sm">Quorum requis pour les décisions majeures</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Adhésion */}
+      <section id="members" className="py-20 bg-emerald-600 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold sm:text-4xl mb-4">Devenir Membre</h2>
+            <p className="text-emerald-100 max-w-2xl mx-auto">
+              Rejoignez une communauté dynamique de professionnels et d'étudiants engagés pour l'avenir.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12">
+            <div className="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20">
+              <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                <Award size={28} /> Conditions d'adhésion
+              </h3>
+              <ul className="space-y-4">
+                <li className="flex gap-3">
+                  <div className="w-6 h-6 bg-emerald-400 text-emerald-900 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold">1</div>
+                  <span>Être professionnel ou universitaire âgé de 18 ans ou plus.</span>
+                </li>
+                <li className="flex gap-3">
+                  <div className="w-6 h-6 bg-emerald-400 text-emerald-900 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold">2</div>
+                  <span>Être domicilié aux Gonaïves ou communes de l'Artibonite.</span>
+                </li>
+                <li className="flex gap-3">
+                  <div className="w-6 h-6 bg-emerald-400 text-emerald-900 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold">3</div>
+                  <span>Participer à au moins deux (2) formations de l'ADIP.</span>
+                </li>
+                <li className="flex gap-3">
+                  <div className="w-6 h-6 bg-emerald-400 text-emerald-900 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold">4</div>
+                  <span>N'avoir aucun antécédent judiciaire et respecter les valeurs morales.</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div className="bg-black/20 p-8 rounded-3xl border border-white/10 flex flex-col justify-center">
+              <h3 className="text-2xl font-bold mb-6">Frais & Inscription</h3>
+              <p className="text-emerald-50 px-4 py-3 bg-white/5 rounded-lg mb-4">
+                <strong>Inscription :</strong> 500 gourdes (pour fournitures et matériels de bureau).
+              </p>
+              <p className="text-emerald-50 px-4 py-3 bg-white/5 rounded-lg mb-8">
+                <strong>Catégories de membres :</strong> Fondateurs, Adhérents, Observateurs, Donateurs et Honoraires.
+              </p>
+              <a href="#contact" className="inline-block text-center bg-white text-emerald-700 py-4 px-8 rounded-xl font-bold hover:bg-emerald-50 transition-colors">
+                Contacter le Comité Exécutif
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Galerie */}
+      <section id="gallery" className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl mb-4">Notre Communauté en Action</h2>
+            <div className="w-20 h-1 bg-emerald-500 mx-auto rounded-full"></div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="group relative overflow-hidden rounded-2xl shadow-lg aspect-square">
+              <img 
+                src="Adip-foto gwoup.jpeg" 
+                alt="Réunion de l'ADIP" 
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                <p className="text-white font-medium">Réunion de planification stratégique</p>
+              </div>
+            </div>
+            <div className="group relative overflow-hidden rounded-2xl shadow-lg aspect-square">
+              <img 
+                src="Adip.jpeg" 
+                alt="Membres de l'ADIP" 
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                <p className="text-white font-medium">Session d'échange et de collaboration</p>
+              </div>
+            </div>
+            <div className="group relative overflow-hidden rounded-2xl shadow-lg aspect-square bg-gray-100 flex items-center justify-center p-8">
+               <img 
+                src="ADIP logo.png" 
+                alt="Logo ADIP" 
+                className="w-3/4 h-auto object-contain" 
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="py-20 bg-gray-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12">
+            <div>
+              <h2 className="text-3xl font-bold mb-8 italic">Restez en contact</h2>
+              <p className="text-gray-400 mb-10 text-lg">
+                Vous avez des questions sur nos activités ou vous souhaitez devenir partenaire ? Notre équipe est à votre écoute.
+              </p>
+              
+              <div className="space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className="bg-emerald-500/10 p-4 rounded-full">
+                    <MapPin className="text-emerald-500" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold">Siège Social</h4>
+                    <p className="text-gray-400 text-sm">UPAG, Rue Chrysostome Humbert, Gonaïves, Haïti</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="bg-emerald-500/10 p-4 rounded-full">
+                    <Users className="text-emerald-500" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold">Coordinateur</h4>
+                    <p className="text-gray-400 text-sm">Contactez le comité exécutif pour toute demande officielle</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="bg-emerald-500/10 p-4 rounded-full">
+                    <Mail className="text-emerald-500" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold">Email</h4>
+                    <p className="text-gray-400 text-sm">contact@adip-haiti.org (Démo)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-3xl p-8 shadow-2xl">
+              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                <div>
+                  <label className="block text-gray-700 text-sm font-bold mb-2">Nom complet</label>
+                  <input type="text" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-gray-900" placeholder="Votre nom" />
+                </div>
+                <div>
+                  <label className="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                  <input type="email" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-gray-900" placeholder="votre@email.com" />
+                </div>
+                <div>
+                  <label className="block text-gray-700 text-sm font-bold mb-2">Message</label>
+                  <textarea rows="4" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-gray-900" placeholder="Comment pouvons-nous vous aider ?"></textarea>
+                </div>
+                <button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl transition-colors shadow-lg shadow-emerald-600/20">
+                  Envoyer le message
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-black border-t border-zinc-800 py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <img 
+            src="ADIP logo.png" 
+            alt="ADIP Logo Small" 
+            className="h-10 w-10 mx-auto mb-4 filter brightness-110" 
+            onError={(e) => e.target.style.display = 'none'}
+          />
+          <p className="text-gray-500 text-sm">
+            © {new Date().getFullYear()} Alliance Dynamique pour l'innovation et le progrès (ADIP). <br/>
+            Tous droits réservés. L'innovation au service du progrès collectif.
+          </p>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default App;
